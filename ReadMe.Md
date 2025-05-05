@@ -30,44 +30,49 @@
 ```bash
 npm install @cryptarastudio/authix-core
 
+```
+#  🔧 Features
+## Feature	Description
+- ✅ hashPassword	Hashes password using bcrypt with salt
+- ✅ verifyPassword	Verifies raw password against hashed one
+- ✅ generateAccessToken	Creates a signed JWT token for short-term session
+- ✅ generateRefreshToken	Issues long-lived refresh tokens
+- ✅ verifyToken	Decodes and validates a JWT (access or refresh)
+- ✅ Fully TypeScript Ready	All types & interfaces included
+- ✅ Minimal footprint	Does only one job and does it well
 
-🔧 Features
-Feature	Description
-✅ hashPassword	Hashes password using bcrypt with salt
-✅ verifyPassword	Verifies raw password against hashed one
-✅ generateAccessToken	Creates a signed JWT token for short-term session
-✅ generateRefreshToken	Issues long-lived refresh tokens
-✅ verifyToken	Decodes and validates a JWT (access or refresh)
-✅ Fully TypeScript Ready	All types & interfaces included
-✅ Minimal footprint	Does only one job and does it well
-
-📘 Function Reference
-🧂 hashPassword(password: string): Promise<string>
-Securely hash a user's password using bcrypt.
-
+# 📘 Function Reference
+### 🧂 hashPassword(password: string): Promise<string>
+- Securely hash a user's password using bcrypt.
+```bash
 const hashed = await auth.hashPassword('admin123');
+```
 
-🔍 verifyPassword(plain: string, hashed: string): Promise<boolean>
-Compare a raw password with a hashed one.
-
+### 🔍 verifyPassword(plain: string, hashed: string): Promise<boolean>
+- Compare a raw password with a hashed one.
+```bash
 const isValid = await auth.verifyPassword('admin123', hashed);
+```
 
-🔐 generateAccessToken(userId: string): string
-Generate a signed access token (JWT). Default expiration: 15m.
+### 🔐 generateAccessToken(userId: string): string
+- Generate a signed access token (JWT). Default expiration: 15m.
 
+```bash
 const token = auth.generateAccessToken('user123');
+```
 
-♻️ generateRefreshToken(userId: string): string
-Generate a signed refresh token. Default expiration: 7d.
-
+### ♻️ generateRefreshToken(userId: string): string
+- Generate a signed refresh token. Default expiration: 7d.
+```bash
 const refresh = auth.generateRefreshToken('user123');
-
-🛡️ verifyToken(token: string): object | null
-Verify and decode a JWT. Returns null if invalid or expired.
-
+```
+### 🛡️ verifyToken(token: string): object | null
+- Verify and decode a JWT. Returns null if invalid or expired.
+```bash
 const payload = auth.verifyToken(accessToken);
-
-💡 Full Example
+```
+### 💡 Full Example
+```bash
 import { AuthService } from '@cryptara/authix-core';
 
 // Create instance with your JWT secret
@@ -88,29 +93,32 @@ async function main() {
   const decoded = auth.verifyToken(access);
 
   console.log({ hashed, valid, access, refresh, decoded });
-}
+
 
 main();
+```
 
 
-⚙️ Constructor
+### ⚙️ Constructor
+```bash
 new AuthService(jwtSecret: string, accessTokenExpiry = '15m', refreshTokenExpiry = '7d')
+```
+| Parameter           | Type     | Description                             |
+|---------------------|----------|-----------------------------------------|
+| `jwtSecret`         | string   | Secret used for signing tokens          |
+| `accessTokenExpiry` | string   | *(Optional)* Access token expiry, default `'15m'` |
+| `refreshTokenExpiry`| string   | *(Optional)* Refresh token expiry, default `'7d'` |
 
-Parameter	Type	Description
-jwtSecret	string	Secret used for signing tokens
-accessTokenExpiry	string	Optional, default '15m'
-refreshTokenExpiry	string	Optional, default '7d'
+## 🧩 Ideal For
+### RESTful APIs (NestJS / Express)
 
-🧩 Ideal For
-RESTful APIs (NestJS / Express)
+- Microservices
 
-Microservices
+- SaaS Applications
 
-SaaS Applications
+- Admin Panels
 
-Admin Panels
-
-🛠 Maintainer
+### 🛠 Maintainer
 Made with ❤️ by Cryptara Studio
   
   
